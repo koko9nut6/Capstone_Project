@@ -28,7 +28,7 @@ class TestingApplicationTests {
     public void 회원가입() throws Exception{
         //given
         Member member = new Member();
-        member.setName("강");
+        member.setName("테스트3");
         member.setEmail("kang@anaer.com");
         member.setPwd("dagrtah1");
         member.setAdmin(Administration.WORKER);
