@@ -41,4 +41,24 @@ class TestingApplicationTests {
         Assertions.assertEquals(member, memberRepository.findOne(saveId));
     }
 
+    @Test
+    public void 중복회원() throws Exception{
+        //given
+        Member member1 = new Member();
+        Member member2 = new Member();
+
+        member1.setName("일");
+        member1.setEmail("123@naver.com");
+        member1.setPwd("123");
+        member2.setName("이");
+        member2.setEmail("123@naver.com");
+        member2.setPwd("123");
+        //when
+        memberService.register(member1);
+        memberService.register(member2);
+
+        //then
+
+    }
+
 }
