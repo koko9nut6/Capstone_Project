@@ -1,11 +1,12 @@
 package caps.testing.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
+@Getter @Setter
 public class Member {
 
     @Id @GeneratedValue
@@ -18,9 +19,11 @@ public class Member {
     @Column(name = "MEMBER_PWD")
     private String pwd;
 
+    @Embedded
     @Column(name = "MEMBER_ADDRESS")
     private Address address;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "MEMBER_ADMIN")
     private Administration admin;
 
