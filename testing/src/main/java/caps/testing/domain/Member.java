@@ -6,10 +6,11 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
+@NoArgsConstructor
 public class Member {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MEMBER_ID")
     private Long id;
 
@@ -22,9 +23,9 @@ public class Member {
     @Column(name = "MEMBER_PWD")
     private String pwd;
 
-    @Embedded
-    @Column(name = "MEMBER_ADDRESS")
-    private Address address;
+//    @Embedded
+//    @Column(name = "MEMBER_ADDRESS")
+//    private Address address;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "MEMBER_ADMIN")
@@ -34,12 +35,11 @@ public class Member {
     private String phone;
 
     @Builder
-    public Member(Long id, String name, String email, String pwd, Address address, Administration admin, String phone) {
+    public Member(Long id, String name, String email, String pwd, Administration admin, String phone) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.pwd = pwd;
-        this.address = address;
         this.admin = admin;
         this.phone = phone;
     }
