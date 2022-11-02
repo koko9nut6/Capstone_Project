@@ -28,11 +28,11 @@ class TestingApplicationTests {
     public void 회원가입() throws Exception{
         //given
         Member member = new Member();
-        member.setName("테스트3");
-        member.setEmail("kang@anaer.com");
-        member.setPwd("dagrtah1");
-        member.setAdmin(Administration.WORKER);
-        member.setPhone("0102841724");
+        member.setName("테스트4");
+        member.setEmail("byun@anaer.com");
+        member.setPwd("dtayqhgmch");
+        member.setAdmin(Administration.MANAGER);
+        member.setPhone("01053256621");
 
         //when
         Long saveId = memberService.register(member);
