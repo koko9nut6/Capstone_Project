@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 public class Member {
 
@@ -33,6 +33,10 @@ public class Member {
 
     @Column(name = "MEMBER_PHONE_NUMBER")
     private String phone;
+
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 
     @Builder
     public Member(Long id, String name, String email, String pwd, Administration admin, String phone) {
