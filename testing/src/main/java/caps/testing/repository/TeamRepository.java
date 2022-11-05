@@ -23,4 +23,5 @@ public class TeamRepository {
     public Team findOne(Long id){
         return em.find(Team.class, id);
     }
+
 }

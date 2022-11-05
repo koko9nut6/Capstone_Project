@@ -15,8 +15,11 @@ public class TeamService {
     private final TeamRepository teamRepository;
 
     public Long register(Team team){
-
         teamRepository.save(team);
         return team.getId();
+    }
+
+    public Team findOne(Long id){
+        return teamRepository.findOne(id);
     }
 }

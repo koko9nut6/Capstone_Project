@@ -1,16 +1,17 @@
 package caps.testing.service;
 
 import caps.testing.domain.Member;
+import caps.testing.form.AccountForm;
 import caps.testing.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class MemberService {
 
@@ -18,7 +19,9 @@ public class MemberService {
 
     private final PasswordEncoder passwordEncoder;
 
-    public Long register(Member member){
+    @Transactional
+    public Long register(AccountForm form){
+        Member member = form.toEntity();
         validateDuplicateMember(member);
         String rawPassword = member.getPwd();
         String encPassword = passwordEncoder.encode(rawPassword);
