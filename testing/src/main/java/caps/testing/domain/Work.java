@@ -18,4 +18,8 @@ public class Work {
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "WORK_OPTION")
+    private WorkOption workOption;
 }
