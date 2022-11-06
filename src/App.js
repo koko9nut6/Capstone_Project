@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import {  Route, Switch, NavLink} from 'react-router-dom';
 
 import MainHeader from './components/MainHeader/MainHeader.js';
-import Header from './components/Header.js';
+
 import Login from './components/Login.js';
 import SignIn from './components/SignIn';
 import Home from './components/Home';

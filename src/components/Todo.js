@@ -1,9 +1,9 @@
-import { render } from "@testing-library/react";
+
 import React from "react";
 import styled from "styled-components";
 
 
-const HeaderStyle=styled.div`
+const TodoStyle=styled.div`
 
 padding-left: 32px;
 padding-right: 32px;
@@ -29,7 +29,7 @@ h1 {
 `;
 
 
-function Header () {
+function Todo () {
     const today = new Date();
     const dateString = today.toLocaleDateString('ko-KR', {
     year: 'numeric',
@@ -40,16 +40,16 @@ function Header () {
 
     return(
         <div>
-        <HeaderStyle> 
-        <h1>알바 24</h1>
+        <TodoStyle> 
+        <h1>Todo</h1>
         <h3>{dateString} {dayName}</h3>
         
-        </HeaderStyle>
+        </TodoStyle>
         </div>
     );
 }
 
-export default Header;
+export default Todo;
 
 
 
