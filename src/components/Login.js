@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import { Route, Switch, NavLink} from 'react-router-dom';
-import SignIn from "./SignIn";
+import SignIn from "./SignUp";
 
 import Card from './UI/Card/Card';
 import classes from './Login.module.css';
@@ -79,7 +79,7 @@ const Login = (props) => {
             <Button type="submit" className={classes.btn} disabled={!formIsValid}>
               Login
             </Button><br/>
-            <Button> 회원가입</Button>
+            <a href="/signin"> 회원가입</a>
         
           </div>
         </form>

@@ -13,8 +13,9 @@ const NavStyle=styled.div`
 `;
 
 const MenuStyle=styled.div`
-  margin-top: 10%;
-  width: 20%;
+  margin-top: 5%;
+
+  width: 30%;
   
   background: #ddd;
   

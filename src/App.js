@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
-import React, {Component} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {  Route, Switch, NavLink} from 'react-router-dom';
 
 import MainHeader from './components/MainHeader/MainHeader.js';
 
 import Login from './components/Login.js';
-import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 import Home from './components/Home';
 
 import 'react-calendar/dist/Calendar.css';
@@ -74,16 +74,16 @@ function App() {
       <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
       
 
-      
+      <React.Fragment>
       <main>
         {!isLoggedIn && <Login onLogin={loginHandler} />}
         {isLoggedIn && <Home onLogout={logoutHandler} />}
       </main>
-      
+      </React.Fragment>
      
 
       <div>
-          
+        {!isLoggedIn && <SignUp onLogin={loginHandler} />}
       </div>      
 
        
