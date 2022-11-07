@@ -1,5 +1,6 @@
 package caps.testing.domain;
 
+import caps.testing.role.MemberRole;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,6 +34,10 @@ public class Member {
 
     @Column(name = "MEMBER_PHONE_NUMBER")
     private String phone;
+
+//    @Enumerated(EnumType.STRING)
+//    @Column(name = "MEMBER_ROLE")
+//    private MemberRole memberRole;
 
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")

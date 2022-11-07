@@ -1,6 +1,7 @@
 package caps.testing.service;
 
 import caps.testing.domain.Member;
+import caps.testing.dto.MemberDTO;
 import caps.testing.form.AccountForm;
 import caps.testing.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,26 +22,28 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public Long register(AccountForm form){
-        Member member = form.toEntity();
-        validateDuplicateMember(member);
-        String rawPassword = member.getPwd();
-        String encPassword = passwordEncoder.encode(rawPassword);
-        member.setPwd(encPassword);
+    public Long save(MemberDTO memberDTO){
+        validateDuplicateMember(memberDTO.toMember());
+        memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
 
-        memberRepository.save(member);
-        return member.getId();
-    }
-
-    public Member findOne(Long id){
-        return memberRepository.findOne(id);
+        return memberRepository.save(Member.builder()
+                .email(memberDTO.getEmail())
+                .name(memberDTO.getName())
+                .pwd(memberDTO.getPwd())
+                .phone(memberDTO.getPhone())
+                .admin(memberDTO.getAdmin())
+                .build()).getId();
     }
 
     public void validateDuplicateMember(Member member){
-        List<Member> findMembers = memberRepository.findByEmail(member.getEmail());
+        Optional<Member> findMembers = memberRepository.findByEmail(member.getEmail());
         if(!findMembers.isEmpty()){
             throw new IllegalStateException("이미 가입한 회원입니다.");
         }
+    }
+
+    public List<Member> findMembers(){
+        return memberRepository.findAll();
     }
 
 }

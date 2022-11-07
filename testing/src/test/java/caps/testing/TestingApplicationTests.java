@@ -7,6 +7,7 @@ import caps.testing.domain.Team;
 import caps.testing.dto.MemberDTO;
 import caps.testing.repository.MemberRepository;
 import caps.testing.repository.TeamRepository;
+import caps.testing.role.MemberRole;
 import caps.testing.service.MemberService;
 import caps.testing.service.TeamService;
 import org.junit.jupiter.api.Assertions;
@@ -18,6 +19,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -42,11 +45,11 @@ class TestingApplicationTests {
     public void 회원가입() throws Exception{
         //given
         Member member = new Member();
-        member.setName("테스트7");
-        member.setEmail("agreth@anaer.com");
-        member.setPwd("dateth");
+        member.setName("테스트8");
+        member.setEmail("gagaet@anaer.com");
+        member.setPwd("datdga");
         member.setAdmin(Administration.MANAGER);
-        member.setPhone("01047526482");
+        member.setPhone("01047523532");
 
 //        Team team = new Team();
 //        team.setName("팀2");
@@ -54,10 +57,34 @@ class TestingApplicationTests {
 
 //        member.setTeam(team);
         //when
-//        Long saveId = memberService.register(member);
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setName("dtotest3");
+        memberDTO.setEmail("dsatq@anaer.com");
+        memberDTO.setPwd("2417dags");
+        memberDTO.setAdmin(Administration.MANAGER);
+        memberDTO.setPhone("01038881111");
+        Long saveId = memberService.save(memberDTO);
+        //then
+
+        System.out.println(saveId);
+
+        List<Member> all = memberRepository.findAll();
+        for(Member m : all){
+            System.out.println(m.getName());
+        }
+    }
+
+    @Test
+    public void 전체조회() throws Exception{
+        //given
+        List<Member> all = memberRepository.findAll();
+        for(Member m : all){
+            System.out.println(m.getName());
+        }
+
+        //when
 
         //then
-//        assertEquals(member, memberRepository.findOne(saveId));
     }
 
     @Test
@@ -79,7 +106,7 @@ class TestingApplicationTests {
     public void 멤버팀조인() throws Exception{
         Member member = new Member();
         member.setName("테스트9");
-        member.setEmail("dfaetawt@anaer.com");
+        member.setEmail("lkkkk@anaer.com");
         member.setPwd("ahfahwerq");
         member.setAdmin(Administration.MANAGER);
         member.setPhone("01047526482");
@@ -112,6 +139,33 @@ class TestingApplicationTests {
 
         //then
 
+    }
+
+    @Test
+    public void 전체멤버조회() throws Exception{
+        //given
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setName("dtotest1");
+        memberDTO.setEmail("atthio@anaer.com");
+        memberDTO.setPwd("241750");
+        memberDTO.setAdmin(Administration.MANAGER);
+        memberDTO.setPhone("01045361111");
+        Long saveId = memberService.save(memberDTO);
+
+        MemberDTO memberDTO1 = new MemberDTO();
+        memberDTO.setName("adg");
+        memberDTO.setEmail("atsetat@anaer.com");
+        memberDTO.setPwd("dgahra");
+        memberDTO.setAdmin(Administration.WORKER);
+        memberDTO.setPhone("01045361111");
+        Long saveId1 = memberService.save(memberDTO1);
+        //when
+
+        List<Member> all = memberRepository.findAll();
+        for(Member m : all){
+            System.out.println(m.getName());
+        }
+        //then
     }
 
 }

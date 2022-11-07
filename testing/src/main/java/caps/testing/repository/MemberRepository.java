@@ -9,28 +9,10 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public class MemberRepository{
+public interface MemberRepository extends JpaRepository<Member, Long>{
 
-    @PersistenceContext
-    private EntityManager em;
-
-    public MemberRepository(EntityManager em) {
-        this.em = em;
-    }
-
-    public void save(Member member){
-        em.persist(member);
-    }
-
-    public Member findOne(Long id){
-        return em.find(Member.class, id);
-    }
-
-    public List<Member> findByEmail(String email){
-        return em.createQuery("select m from member m where m.email = :email", Member.class)
-                .setParameter("email", email)
-                .getResultList();
-    }
+    Optional<Member> findByEmail(String email);
 }
