@@ -2,14 +2,21 @@ package caps.testing.domain;
 
 import caps.testing.role.MemberRole;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity(name = "member")
 @Data
 @Getter @Setter
 @NoArgsConstructor
-public class Member {
+public class Member extends BaseTimeEntity implements UserDetails {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MEMBER_ID")
@@ -43,6 +50,8 @@ public class Member {
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
+
+
     @Builder
     public Member(Long id, String name, String email, String pwd, Administration admin, String phone) {
         this.id = id;
@@ -51,5 +60,46 @@ public class Member {
         this.pwd = pwd;
         this.admin = admin;
         this.phone = phone;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> auth = new ArrayList<>();
+        auth.add(new SimpleGrantedAuthority(admin.name()));
+        return auth;
+    }
+
+    public void encodePassword(PasswordEncoder passwordEncoder){
+        this.pwd = passwordEncoder.encode(pwd);
+    }
+
+    @Override
+    public String getPassword() {
+        return pwd;
+    }
+
+    @Override
+    public String getUsername() {
+        return name;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

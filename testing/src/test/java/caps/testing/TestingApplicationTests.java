@@ -63,10 +63,10 @@ class TestingApplicationTests {
         memberDTO.setPwd("2417dags");
         memberDTO.setAdmin(Administration.MANAGER);
         memberDTO.setPhone("01038881111");
-        Long saveId = memberService.save(memberDTO);
+//        Long saveId = memberService.save(memberDTO);
         //then
 
-        System.out.println(saveId);
+//        System.out.println(saveId);
 
         List<Member> all = memberRepository.findAll();
         for(Member m : all){
@@ -150,7 +150,7 @@ class TestingApplicationTests {
         memberDTO.setPwd("241750");
         memberDTO.setAdmin(Administration.MANAGER);
         memberDTO.setPhone("01045361111");
-        Long saveId = memberService.save(memberDTO);
+//        Long saveId = memberService.save(memberDTO);
 
         MemberDTO memberDTO1 = new MemberDTO();
         memberDTO.setName("adg");
@@ -158,7 +158,7 @@ class TestingApplicationTests {
         memberDTO.setPwd("dgahra");
         memberDTO.setAdmin(Administration.WORKER);
         memberDTO.setPhone("01045361111");
-        Long saveId1 = memberService.save(memberDTO1);
+//        Long saveId1 = memberService.save(memberDTO1);
         //when
 
         List<Member> all = memberRepository.findAll();
