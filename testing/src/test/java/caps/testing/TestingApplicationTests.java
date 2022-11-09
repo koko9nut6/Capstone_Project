@@ -48,7 +48,7 @@ class TestingApplicationTests {
         member.setName("테스트8");
         member.setEmail("gagaet@anaer.com");
         member.setPwd("datdga");
-        member.setAdmin(Administration.MANAGER);
+//        member.setAdmin(Administration.MANAGER);
         member.setPhone("01047523532");
 
 //        Team team = new Team();
@@ -61,7 +61,7 @@ class TestingApplicationTests {
         memberDTO.setName("dtotest3");
         memberDTO.setEmail("dsatq@anaer.com");
         memberDTO.setPwd("2417dags");
-        memberDTO.setAdmin(Administration.MANAGER);
+//        memberDTO.setAdmin(Administration.MANAGER);
         memberDTO.setPhone("01038881111");
 //        Long saveId = memberService.save(memberDTO);
         //then
@@ -108,7 +108,7 @@ class TestingApplicationTests {
         member.setName("테스트9");
         member.setEmail("lkkkk@anaer.com");
         member.setPwd("ahfahwerq");
-        member.setAdmin(Administration.MANAGER);
+        member.setAdmin(Administration.ROLE_MANAGER);
         member.setPhone("01047526482");
 
         Team team;
@@ -148,7 +148,7 @@ class TestingApplicationTests {
         memberDTO.setName("dtotest1");
         memberDTO.setEmail("atthio@anaer.com");
         memberDTO.setPwd("241750");
-        memberDTO.setAdmin(Administration.MANAGER);
+//        memberDTO.setAdmin(Administration.MANAGER);
         memberDTO.setPhone("01045361111");
 //        Long saveId = memberService.save(memberDTO);
 
@@ -156,7 +156,7 @@ class TestingApplicationTests {
         memberDTO.setName("adg");
         memberDTO.setEmail("atsetat@anaer.com");
         memberDTO.setPwd("dgahra");
-        memberDTO.setAdmin(Administration.WORKER);
+//        memberDTO.setAdmin(Administration.WORKER);
         memberDTO.setPhone("01045361111");
 //        Long saveId1 = memberService.save(memberDTO1);
         //when

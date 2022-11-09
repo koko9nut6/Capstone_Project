@@ -31,7 +31,7 @@ public class MemberController {
         return memberService.join(memberSignUpRequestDto);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/member/login")
     public TokenResponseDto login(@RequestBody @Valid MemberSignInRequestDto requestDto) {
         return memberService.login(requestDto);
     }

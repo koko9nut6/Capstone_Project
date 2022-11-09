@@ -5,6 +5,8 @@ import caps.testing.dto.MemberDTO;
 import caps.testing.dto.MemberSignInRequestDto;
 import caps.testing.dto.MemberSignUpRequestDto;
 import caps.testing.dto.TokenResponseDto;
+import caps.testing.exception.MemberException;
+import caps.testing.exception.MemberExceptionType;
 import caps.testing.form.AccountForm;
 import caps.testing.jwt.JwtTokenProvider;
 import caps.testing.repository.MemberRepository;
@@ -38,15 +40,17 @@ public class MemberService {
 
     @Transactional
     public TokenResponseDto login(MemberSignInRequestDto requestDto) {
-        Optional<Member> member = memberRepository.findByEmail(requestDto.getEmail());
+        Member member = memberRepository.findByEmail(requestDto.getEmail())
+                .orElseThrow(() -> new MemberException(MemberExceptionType.NOT_SIGNUP_EMAIL));
+        validateMatchedPassword(requestDto.getPwd(), member.getPwd());
 
         //TODO : Access Token 과 Refresh Token 을 생성합니다.
-        String accessToken = jwtTokenProvider.createAccessToken(member.get().getEmail(), member.get().getAdmin().name());
+        String accessToken = jwtTokenProvider.createAccessToken(member.getEmail(), member.getAdmin().name());
         String refreshToken = jwtTokenProvider.createRefreshToken();
 
         //TODO : Refresh Token 을 DB에 저장합니다.
-//        member.updateRefreshToken(refreshToken);
-        memberRepository.save(member.get());
+        member.updateRefreshToken(refreshToken);
+        memberRepository.save(member);
 
         return TokenResponseDto.builder()
                 .accessToken(accessToken)
@@ -65,4 +69,9 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
+    private void validateMatchedPassword(String validPassword, String memberPassword){
+        if(!passwordEncoder.matches(validPassword, memberPassword)){
+            throw new MemberException(MemberExceptionType.WRONG_PASSWORD);
+        }
+    }
 }

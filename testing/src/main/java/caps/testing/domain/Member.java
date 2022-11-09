@@ -46,11 +46,11 @@ public class Member extends BaseTimeEntity implements UserDetails {
 //    @Column(name = "MEMBER_ROLE")
 //    private MemberRole memberRole;
 
+    private String refreshToken;
+
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
     private Team team;
-
-
 
     @Builder
     public Member(Long id, String name, String email, String pwd, Administration admin, String phone) {
@@ -60,6 +60,14 @@ public class Member extends BaseTimeEntity implements UserDetails {
         this.pwd = pwd;
         this.admin = admin;
         this.phone = phone;
+    }
+
+    public void addWorkerAuthority(){
+        this.admin = Administration.ROLE_WORKER;
+    }
+
+    public void addManagerAuthority(){
+        this.admin = Administration.ROLE_MANAGER;
     }
 
     @Override
@@ -101,5 +109,9 @@ public class Member extends BaseTimeEntity implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void updateRefreshToken(String refreshToken){
+        this.refreshToken = refreshToken;
     }
 }

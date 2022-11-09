@@ -1,5 +1,5 @@
 package caps.testing.domain;
 
 public enum Administration {
-    MANAGER, WORKER
+    ROLE_MANAGER, ROLE_WORKER
 }
